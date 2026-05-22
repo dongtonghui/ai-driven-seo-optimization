@@ -23,49 +23,55 @@ AI 驱动的 SEO 优化与内容生成
 
 ## Installation / 安装
 
-### Command Line Installation / 命令行安装
-
-**Prerequisites / 前提条件**: Git must be installed on your system.
-
-**Step 1 — Clone the repository to your skills directory / 克隆仓库到技能目录**
+### One-Liner CLI Install / 一行命令安装（推荐）
 
 ```bash
-# Default skills path for gstack / Kimi CLI (macOS/Linux)
-# gstack / Kimi CLI 默认技能路径（macOS/Linux）
-mkdir -p ~/.kimi/skills && cd ~/.kimi/skills
-
-# Clone the repository / 克隆仓库
-git clone https://github.com/dongtonghui/ai-driven-seo-optimization.git ai-driven-seo-optimization
+curl -sSL https://raw.githubusercontent.com/dongtonghui/ai-driven-seo-optimization/main/install.sh | bash
 ```
 
-> **Note / 注意**: If you installed your agent CLI with a different configuration, replace `~/.kimi/skills` with your actual skills directory path (e.g., `~/.config/agents/skills`).
-> 如果你的智能体 CLI 使用了不同的配置，请将 `~/.kimi/skills` 替换为实际的技能目录路径（例如 `~/.config/agents/skills`）。
+> **Prerequisites / 前提条件**: Git must be installed on your system.
 
-**Step 2 — Verify installation / 验证安装**
+This command auto-detects your agent skills directory (`~/.kimi/skills`, `~/.config/agents/skills`, or custom `KIMI_SKILLS_PATH`) and installs the skill.
+
+该命令会自动检测你的智能体技能目录（`~/.kimi/skills`、`~/.config/agents/skills` 或自定义的 `KIMI_SKILLS_PATH`）并完成安装。
+
+---
+
+### Manual Install / 手动安装
+
+If you prefer to install manually or the one-liner fails:
+
+```bash
+# Clone to your skills directory / 克隆到技能目录
+git clone --depth 1 https://github.com/dongtonghui/ai-driven-seo-optimization.git \
+  ~/.kimi/skills/ai-driven-seo-optimization
+```
+
+> **Note / 注意**: Replace `~/.kimi/skills` with your actual skills directory if different.
+> 如果你的技能目录不同，请将 `~/.kimi/skills` 替换为实际路径。
+
+---
+
+### Verify Installation / 验证安装
 
 ```bash
 ls ~/.kimi/skills/ai-driven-seo-optimization/SKILL.md
 # Expected output / 期望输出: ~/.kimi/skills/ai-driven-seo-optimization/SKILL.md
 ```
 
-**Step 3 — Restart or reload your agent CLI / 重启或重新加载智能体 CLI**
+After installation, restart your agent CLI session. The skill will be auto-detected on next use.
 
-After installation, restart your agent session or run the reload command so the new skill is recognized:
+安装完成后，重启你的智能体 CLI 会话，技能将在下次使用时自动被检测到。
 
-```bash
-# For gstack / Kimi CLI — skills are auto-detected on next command
-# gstack / Kimi CLI — 技能会在下一次命令时自动检测
-```
+---
 
-**Updating / 更新**
-
-To update to the latest version:
+### Update / 更新
 
 ```bash
 cd ~/.kimi/skills/ai-driven-seo-optimization && git pull origin main
 ```
 
-**Uninstalling / 卸载**
+### Uninstall / 卸载
 
 ```bash
 rm -rf ~/.kimi/skills/ai-driven-seo-optimization
