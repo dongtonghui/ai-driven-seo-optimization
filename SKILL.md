@@ -23,15 +23,74 @@ This skill combines two authoritative sources into one actionable workflow:
 
 **Golden Rule**: Content must be created to benefit people, not to manipulate search rankings. AI is a tool for research, structure, and scale—but originality, accuracy, and human value are mandatory.
 
+### 1.1 Ideal User Persona (理想用户画像)
+
+Before creating content, define a detailed persona that represents the target audience. A persona is not just demographics—it is a decision-making prototype.
+
+**Core Dimensions:**
+
+| Dimension | What to Capture | SEO Implication |
+|-----------|-----------------|-----------------|
+| **Demographics** | Age, gender, income, occupation, education | Tone, examples, pricing transparency |
+| **Geography** | City, district, neighborhood landmarks | Local keyword modifiers, landing pages, NAP consistency |
+| **Psychographics** | Interests, values, purchase motivations | Content angles, emotional hooks, trust signals |
+| **Behavior** | Online channels, search devices, purchase habits | Content format (mobile-first vs. desktop), channel mix |
+| **Pain Points & Goals** | Problems they want solved; desired outcomes | Long-tail queries, FAQ topics, CTA design |
+
+**Localization Rule**: For local SEO, go beyond "Shanghai" to specific districts or landmarks (e.g., "静安区搬家服务", "EV charging stations near Times Square"). For multi-language audiences, build a separate persona per language/region and adapt cultural references, tone, and examples.
+
+**Deliverable**: `01-audit-reports/user-persona-<locale>.md`
+
 ## 2. Optimization Framework: The 5-Pillar SEO System
 
 | Pillar | Google Principle | QuickCreator Mechanism | Key Actions |
 |--------|------------------|------------------------|-------------|
 | **P1: Topical Authority** | Helpful, comprehensive, original content | Topic Strategy Agent (semantic clusters, buyer-journey mapping) | Build topic matrices, cover sub-questions, create internal linking architecture |
 | **P2: Content Quality (EEAT)** | Experience, Expertise, Authoritativeness, Trust | Content Optimization Agent (EEAT + Main Content Quality scoring) | Add author bios, real examples, source citations, methodology disclosures |
-| **P3: Technical Foundation** | Crawlability, structured data, performance | SEO metadata & schema automation | Optimize titles, descriptions, alt text, URLs, schema markup, Core Web Vitals |
-| **P4: Intent Alignment** | People-first, answer-ready content | ICP-based research & SERP/PAA analysis | Match content to search intent (Informational, Commercial, Transactional) |
-| **P5: Conversion Layer** | Great page experience, clear next steps | Conversion Agent (context-aware CTAs) | Embed natural CTAs by journey stage, track lead attribution |
+| **P3: Technical Foundation** | Crawlability, structured data, performance | SEO metadata & schema automation | Optimize titles, descriptions, alt text, URLs, schema markup, Core Web Vitals, hreflang, NAP |
+| **P4: Intent Alignment** | People-first, answer-ready content | ICP-based research & SERP/PAA analysis | Match content to search intent (Informational, Commercial, Transactional) across 5 journey stages |
+| **P5: Conversion Layer** | Great page experience, clear next steps | Conversion Agent (context-aware CTAs) | Embed natural CTAs by journey stage (Awareness → Advocacy), track lead attribution |
+
+## 2.1 User Lifecycle Journey & Search Intent
+
+Map every content piece to one of five journey stages. Each stage has distinct search intent, content type, and distribution channel.
+
+| Stage | User Mindset | Search Intent | Content Types | Channels | CTA Intensity |
+|-------|-------------|---------------|---------------|----------|---------------|
+| **Awareness** | "I have a problem" | Informational, broad education | Industry guides, news, brand stories, trend reports | SEO, social media, paid display, WeChat articles | Soft (subscribe, read more) |
+| **Consideration** | "What are my options?" | Commercial investigation | Comparison posts, case studies, deep guides, reviews | SEO, email nurture, retargeting, WeChat/Weibo | Medium (download, watch demo) |
+| **Decision** | "Why should I choose you?" | Transactional, local intent | Product pages, pricing, local landing pages, FAQ | SEO (local pack), direct sales, mini-programs | Hard (buy, get quote, call) |
+| **Retention** | "How do I get more value?" | Support, advanced usage | Tutorials, upgrade guides, customer stories, member content | Email, community, in-app, WeChat groups | Engagement (renew, upgrade) |
+| **Advocacy** | "I want to tell others" | Branded, social proof | Testimonials, referral programs, UGC campaigns | Social, community, referral, KOL shares | Viral (share, recommend) |
+
+**Localization Note**: In the Decision stage, "near me" and "[City] + service" queries dominate. Build dedicated city/region landing pages with local schema, map embeds, and localized NAP. For Chinese markets, optimize for Baidu Maps and local directory listings (大众点评, 58同城).
+
+## 2.2 Keyword Research Methodology
+
+Keyword research is the bridge between user intent and content. Use the following tool stack and workflow:
+
+**Tool Comparison:**
+
+| Tool | Purpose | Key Feature |
+|------|---------|-------------|
+| Google Keyword Planner | Keyword discovery, traffic estimates | Free (requires Google Ads account) |
+| Google Trends | Trend analysis, seasonal demand | Regional & time-based trend views |
+| Ahrefs | Competitive research, backlink analysis | Free site health check; deep paid data |
+| SEMrush | Full-suite keyword & SERP analysis | Global database, competitor gap reports |
+| AnswerThePublic | Question-based long-tail mining | Visualizes PAA-style queries |
+| Baidu Index | Chinese market trend analysis | Region/interest segmentation for Baidu SEO |
+
+**Research Workflow:**
+1. **Seed List**: Extract 5-10 core business pillars and their Chinese/English equivalents.
+2. **Long-tail Expansion**: Use SEMrush / Keyword Planner to generate long-tail variants; record monthly volume and trend.
+3. **Competitor Mapping**: In Ahrefs/SEMrush, identify 3-5 competitors' top-ranking keywords and content depth.
+4. **Local Habit Mining**: Collect regional phrasing (e.g., "附近搬家公司", "北京SEO优化", "New York moving service", " dentist near me").
+5. **Multi-channel Validation**: Cross-check with GSC internal data, Google Trends/Baidu Index, and autocomplete suggestions.
+6. **Intent Tagging**: Label every keyword by journey stage and localization modifier.
+
+**Multi-language Rule**: Conduct separate keyword research for each target language. Mark pages with `hreflang` annotations to signal language/region variants to search engines.
+
+**Deliverable**: `02-keyword-research/keyword-research-report.md`
 
 ## 3. Workflow: From Audit to Publish
 
@@ -46,52 +105,71 @@ Before creating new content, audit the existing site:
 
 **Goal**: Build a decision-aware content architecture, not a flat keyword list.
 
-1. **Seed Input**: Define 3-5 core product/service categories or business pillars.
-2. **Demand Analysis**:
-   - Extract real user questions from SERP "People Also Ask" and related searches.
-   - Analyze competitor content gaps.
-3. **Journey Tagging**: Categorize each topic into:
+1. **Persona Alignment**: Reference the `user-persona` deliverable. Ensure topics map to real pain points, geographies, and search behaviors.
+2. **Seed Input**: Define 3-5 core product/service categories or business pillars.
+3. **Demand Analysis**:
+   - Extract real user questions from SERP "People Also Ask", related searches, and AnswerThePublic.
+   - Analyze competitor content gaps via Ahrefs/SEMrush.
+   - Mine local phrasing habits (e.g., city+district+service combinations).
+4. **Journey Tagging**: Categorize each topic into one of five stages:
    - **Awareness (TOFU)**: Problem discovery, education
    - **Consideration (MOFU)**: Comparison, vendor evaluation, trade-offs
-   - **Purchase (BOFU)**: Validation, implementation, pricing
-4. **Topic Matrix**: Cross-reference buyer personas with journey stages. Prioritize underrepresented stages.
-5. **Semantic Expansion**: For each core topic, fan out 5-10 sub-questions to build topical depth.
+   - **Decision (BOFU)**: Validation, implementation, pricing, local intent
+   - **Retention**: Support, advanced usage, loyalty building
+   - **Advocacy**: Social proof, referral, community building
+5. **Topic Matrix**: Cross-reference buyer personas with journey stages. Prioritize underrepresented stages.
+6. **Semantic Expansion**: For each core topic, fan out 5-10 sub-questions to build topical depth.
+7. **Localization Layer**: Identify geo-modified keywords for each core topic. Plan dedicated local landing pages (one per target city/region).
 
 **Deliverable**: `02-keyword-research/topic-matrix.md`
 
 ```markdown
 ### Topic Matrix Template
-| Core Topic | Sub-Topic | Journey Stage | Target Keyword | Search Intent | Priority | Internal Links To |
-|------------|-----------|---------------|----------------|---------------|----------|-------------------|
+| Core Topic | Sub-Topic | Journey Stage | Target Keyword | Search Intent | Localization | Priority | Internal Links To |
+|------------|-----------|---------------|----------------|---------------|--------------|----------|-------------------|
 ```
 
 ### Phase 2: Content Creation (The Agentic Writing Pipeline)
 
-**Goal**: Produce original, researched, SEO-optimized content that passes Google’s helpful-content standards.
+**Goal**: Produce original, researched, SEO-optimized content that passes Google's helpful-content standards.
 
 **Step 1 — Deep Research**
-- Define the Ideal Customer Profile (ICP) for this piece.
+- Define the Ideal Customer Profile (ICP) for this piece (reference persona deliverable).
 - Analyze SERP top 3 results: What do they cover? What do they miss?
 - Gather authoritative sources and statistics.
+- Map the piece to a specific journey stage and corresponding search intent.
 
 **Step 2 — Outline**
 - Create a unique angle (point of view) tied to the business.
 - Structure with clear H2s and H3s.
 - Plan internal links to product/service pages.
+- For local landing pages: plan location-specific sections (local team, service area map, local testimonials, NAP block).
 
 **Step 3 — Writing with Knowledge Base**
 - Reference private knowledge (product docs, case studies, internal guides).
 - Include real-world examples, data, and expert quotes.
 - Avoid generic fluff. Every paragraph should add value.
+- For multi-language content: adapt cultural references; do not translate literally.
 
 **Step 4 — SEO Packaging**
-- **Title**: 50-60 chars, keyword-forward, compelling.
-- **Meta Description**: 120-160 chars, include CTA.
-- **URL Slug**: Short, descriptive, hyphenated, keyword-rich.
+- **Title**: 50-60 chars, keyword-forward, compelling. Include city name for local pages.
+- **Meta Description**: 120-160 chars, include CTA. Add location modifiers for local pages.
+- **URL Slug**: Short, descriptive, hyphenated, keyword-rich. Use pinyin or English for Chinese slugs.
 - **H1**: Exactly one per page, descriptive, includes primary keyword.
-- **Images**: High-quality, near relevant text, descriptive alt text.
+- **Images**: High-quality, near relevant text, descriptive alt text. Include local imagery for landing pages.
 - **Internal Links**: 3-5 contextual links to related pages.
-- **Schema**: Add Article/Product/FAQ schema as appropriate.
+- **Schema**: Add Article/Product/FAQ/LocalBusiness schema as appropriate.
+- **FAQ Section**: Add an FAQ block using FAQPage schema to capture PAA/featured snippet opportunities.
+
+**Content Types by Stage:**
+
+| Stage | Primary Content | Supporting Content | Schema / Markup |
+|-------|----------------|--------------------|----------------|
+| **Awareness** | Blog posts, guides, trend reports | Social snippets, newsletter teasers | Article, BreadcrumbList |
+| **Consideration** | Comparison pages, case studies, deep guides | Downloadable PDFs, demo videos | Article, Product, Review |
+| **Decision** | Product/service pages, local landing pages | Pricing tables, live chat, map embeds | Product, LocalBusiness, Review, FAQPage |
+| **Retention** | Tutorials, knowledge base, customer stories | Email sequences, community posts | Article, FAQPage |
+| **Advocacy** | Testimonials, referral pages, UGC galleries | Social share cards, reward dashboards | Review, Organization |
 
 **Deliverable**: `03-content-optimization/article-drafts/`
 
@@ -124,7 +202,7 @@ Evaluate every draft against these dimensions:
 
 ### Phase 4: Technical On-Page Optimization
 
-**Goal**: Make the content discoverable and properly rendered by search engines.
+**Goal**: Make the content discoverable, properly rendered, and locally relevant by search engines.
 
 Execute this checklist for every page:
 
@@ -153,30 +231,56 @@ Execute this checklist for every page:
 5. **Structured Data**
    - JSON-LD schema validated
    - Article schema for blogs, Product schema for product pages, FAQ schema for Q&A sections
+   - **LocalBusiness / Organization schema** for local SEO (name, address, phone, geo, opening hours)
+   - **Service schema** for service-oriented pages
+   - **Review schema** for testimonials and ratings
 
 6. **Mobile & Performance**
    - Page passes mobile-friendly test
    - LCP < 2.5s, CLS < 0.1, TTFB < 800ms
+   - Responsive design or dedicated mobile site with proper viewport meta tag
+   - CDN, image compression, Gzip/Brotli enabled
+
+7. **Multi-language & Localization**
+   - `hreflang` tags in `<head>` or HTTP headers for every language/region variant
+   - HTML `lang` attribute set correctly per page
+   - NAP (Name, Address, Phone) consistent across site footer, contact page, and third-party directories
+   - Local landing pages include embedded map and district-specific imagery
+
+8. **Page Structure & Indexing**
+   - Each page targets one core keyword cluster
+   - Title and first paragraph include primary keyword
+   - Body uses related terms naturally with clear heading hierarchy
+   - XML sitemap submitted and 404 errors fixed
 
 **Deliverable**: `04-technical-fixes/on-page-seo-checklist.md`
 
 ### Phase 5: Conversion Optimization
 
-**Goal**: Turn traffic into measurable business outcomes.
+**Goal**: Turn traffic into measurable business outcomes across the full lifecycle.
 
 1. **Journey-Stage CTA Mapping**:
-   - **TOFU**: Soft CTAs (subscribe, download guide, read related article)
-   - **MOFU**: Medium CTAs (compare solutions, watch demo, request consultation)
-   - **BOFU**: Hard CTAs (get quote, free trial, contact sales)
+   - **Awareness (TOFU)**: Soft CTAs (subscribe, download guide, read related article)
+   - **Consideration (MOFU)**: Medium CTAs (compare solutions, watch demo, request consultation)
+   - **Decision (BOFU)**: Hard CTAs (get quote, free trial, contact sales, book appointment)
+   - **Retention**: Engagement CTAs (join community, access premium content, schedule onboarding)
+   - **Advocacy**: Viral CTAs (share story, leave review, refer a friend, join ambassador program)
 
 2. **Placement Rules**:
    - Place a CTA after the value proposition is established (usually within first 30% for BOFU).
    - Add a mid-content CTA after a key insight.
    - End with a clear next-step CTA.
+   - For local pages: place "Call Now" and "Get Directions" above the fold.
 
 3. **Lead Attribution**:
    - Tag all forms/CTAs with UTM parameters or event tracking.
    - Ensure lead data flows to CRM/email tool.
+   - Track local conversions separately (phone calls, direction requests, store visits).
+
+4. **Trust Signals by Stage**:
+   - **Decision**: Client logos, review counts, guarantees, secure payment badges
+   - **Retention**: Onboarding videos, dedicated support contacts
+   - **Advocacy**: Referral rewards, social proof counters, share buttons
 
 **Deliverable**: `05-backlinks-outreach/conversion-map.md`
 
@@ -379,6 +483,36 @@ When using AI to generate or assist content:
 4. **Avoid Scaled Content Abuse**: Do not mass-produce low-value pages. Every page must serve a distinct user need.
 5. **Metadata Quality**: AI-generated titles, descriptions, and alt text must be accurate and relevant.
 
+## 4.1 Localization & Multi-language SEO Strategy
+
+For sites targeting multiple languages or regions, apply these additional rules:
+
+1. **hreflang Implementation**: Add `<link rel="alternate" hreflang="x" href="URL" />` tags in the `<head>` of every page. Include a self-referencing hreflang and an `x-default` fallback. Example:
+   ```html
+   <link rel="alternate" hreflang="en-us" href="https://example.com/en-us/service" />
+   <link rel="alternate" hreflang="zh-cn" href="https://example.com/zh-cn/service" />
+   <link rel="alternate" hreflang="x-default" href="https://example.com/service" />
+   ```
+
+2. **HTML lang Attribute**: Each page must declare its language via `<html lang="zh-CN">` or `<html lang="en-US">`.
+
+3. **NAP Consistency**: Ensure Name, Address, Phone are identical across:
+   - Website footer and contact page
+   - Google Business Profile / Baidu Maps / 百度地图
+   - Industry directories (大众点评, 58同城, Yelp, Yellow Pages)
+   - Even minor formatting differences (e.g., "Suite" vs "Ste") can dilute local ranking signals.
+
+4. **Local Landing Pages**: Create one dedicated page per target city/region. Each page must include:
+   - City name in title, H1, URL slug, and meta description
+   - Local service description and team intro
+   - Embedded map and accurate NAP block
+   - Local customer testimonials with Review schema
+   - Internal links to broader service pages
+
+5. **Maps & Citations**: Claim and optimize Google Business Profile (or Baidu Maps for China). Post updates, respond to reviews, and ensure category selection matches target keywords.
+
+6. **Multimedia Localization**: Translate/subtitle videos, adapt image alt text, and ensure infographics use culturally appropriate examples.
+
 ## 5. Deliverables Structure
 
 For every SEO engagement, store outputs in this structure:
@@ -387,23 +521,30 @@ For every SEO engagement, store outputs in this structure:
 fbkpower-seo/
 ├── 01-audit-reports/
 │   ├── technical-seo-audit-<date>.md
-│   └── competitor-gap-analysis.md
+│   ├── competitor-gap-analysis.md
+│   └── user-persona-<locale>.md
 ├── 02-keyword-research/
 │   ├── topic-matrix.md
+│   ├── keyword-research-report.md
 │   └── keyword-opportunities.md
 ├── 03-content-optimization/
 │   ├── article-drafts/
 │   │   ├── <slug>.md
 │   │   └── ...
 │   ├── eeat-review-checklist.md
-│   └── content-calendar.md
+│   ├── content-calendar.md
+│   └── local-landing-pages/
+│       ├── <city>-<service>.md
+│       └── ...
 ├── 04-technical-fixes/
 │   ├── on-page-seo-checklist.md
 │   ├── schema-implementations.json
-│   └── performance-baseline.md
+│   ├── performance-baseline.md
+│   └── hreflang-mapping.md
 ├── 05-backlinks-outreach/
 │   ├── conversion-map.md
-│   └── outreach-targets.md
+│   ├── outreach-targets.md
+│   └── local-citations-list.md
 └── 06-deliverables/
     └── seo-strategy-summary-<date>.md
 ```
@@ -415,6 +556,10 @@ fbkpower-seo/
 - **Ignoring EEAT signals**: Anonymous content without sources or author bios underperforms in competitive SERPs.
 - **Skipping baseline metrics**: Without before/after data, you cannot prove ROI.
 - **CTA mismatch**: Asking for a demo in an awareness-stage article creates friction. Match CTA intensity to intent.
+- **Neglecting local schema**: Missing LocalBusiness or Review schema reduces visibility in local pack results.
+- **Inconsistent NAP**: Any variation in name, address, or phone across directories weakens local SEO trust signals.
+- **Missing hreflang**: Without proper language/region annotations, search engines may serve the wrong version to users.
+- **Thin local pages**: City landing pages with only a title change and no local-specific content are treated as doorway pages.
 - **WordPress + Elementor-specific**: Bulk DOM edits in the preview iframe do NOT persist. Use `window.elementor.elementsModel` or the WordPress REST API for reliable updates. See Phase 6 and `wordpress-browser-api-automation` skill.
 - **Yoast "Search Appearance" modal trap**: In the block editor, clicking Yoast's "Search Appearance" often opens a full-screen modal instead of expanding the sidebar. Use `browser_vision` to confirm UI state before typing.
 - **Nonce expiration**: `X-WP-Nonce` expires on page reload or timeout. If a call returns 403, re-extract from an active `/wp-admin/` page.
