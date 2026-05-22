@@ -8,15 +8,68 @@ AI 驱动的 SEO 优化与内容生成
 
 ## 📋 Table of Contents / 目录
 
-1. [What Is This Skill? / 这是什么？](#what-is-this-skill--这是什么)
-2. [When to Use / 触发条件](#when-to-use--触发条件)
-3. [The 5-Pillar SEO System / 五大支柱 SEO 体系](#the-5-pillar-seo-system--五大支柱-seo-体系)
-4. [Workflow / 工作流](#workflow--工作流)
-5. [Examples / 使用示例](#examples--使用示例)
-6. [Deliverables Structure / 交付物结构](#deliverables-structure--交付物结构)
-7. [AI Content Compliance / AI 内容合规](#ai-content-compliance--ai-内容合规)
-8. [Common Pitfalls / 常见陷阱](#common-pitfalls--常见陷阱)
-9. [Quick Reference / 快速参考](#quick-reference--快速参考)
+1. [Installation / 安装](#installation--安装)
+2. [What Is This Skill? / 这是什么？](#what-is-this-skill--这是什么)
+3. [When to Use / 触发条件](#when-to-use--触发条件)
+4. [The 5-Pillar SEO System / 五大支柱 SEO 体系](#the-5-pillar-seo-system--五大支柱-seo-体系)
+5. [Workflow / 工作流](#workflow--工作流)
+6. [Examples / 使用示例](#examples--使用示例)
+7. [Deliverables Structure / 交付物结构](#deliverables-structure--交付物结构)
+8. [AI Content Compliance / AI 内容合规](#ai-content-compliance--ai-内容合规)
+9. [Common Pitfalls / 常见陷阱](#common-pitfalls--常见陷阱)
+10. [Quick Reference / 快速参考](#quick-reference--快速参考)
+
+---
+
+## Installation / 安装
+
+### Command Line Installation / 命令行安装
+
+**Prerequisites / 前提条件**: Git must be installed on your system.
+
+**Step 1 — Clone the repository to your skills directory / 克隆仓库到技能目录**
+
+```bash
+# Default skills path for gstack / Kimi CLI (macOS/Linux)
+# gstack / Kimi CLI 默认技能路径（macOS/Linux）
+mkdir -p ~/.kimi/skills && cd ~/.kimi/skills
+
+# Clone the repository / 克隆仓库
+git clone https://github.com/dongtonghui/ai-driven-seo-optimization.git ai-driven-seo-optimization
+```
+
+> **Note / 注意**: If you installed your agent CLI with a different configuration, replace `~/.kimi/skills` with your actual skills directory path (e.g., `~/.config/agents/skills`).
+> 如果你的智能体 CLI 使用了不同的配置，请将 `~/.kimi/skills` 替换为实际的技能目录路径（例如 `~/.config/agents/skills`）。
+
+**Step 2 — Verify installation / 验证安装**
+
+```bash
+ls ~/.kimi/skills/ai-driven-seo-optimization/SKILL.md
+# Expected output / 期望输出: ~/.kimi/skills/ai-driven-seo-optimization/SKILL.md
+```
+
+**Step 3 — Restart or reload your agent CLI / 重启或重新加载智能体 CLI**
+
+After installation, restart your agent session or run the reload command so the new skill is recognized:
+
+```bash
+# For gstack / Kimi CLI — skills are auto-detected on next command
+# gstack / Kimi CLI — 技能会在下一次命令时自动检测
+```
+
+**Updating / 更新**
+
+To update to the latest version:
+
+```bash
+cd ~/.kimi/skills/ai-driven-seo-optimization && git pull origin main
+```
+
+**Uninstalling / 卸载**
+
+```bash
+rm -rf ~/.kimi/skills/ai-driven-seo-optimization
+```
 
 ---
 
