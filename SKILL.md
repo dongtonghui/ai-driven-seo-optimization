@@ -1,11 +1,9 @@
 ---
 name: ai-driven-seo-optimization
 title: AI-Driven SEO Optimization & Content Generation
-description: >
-  A systematic SEO optimization skill that fuses Google Search Central's official guidelines
-  (E-E-A-T, people-first content, technical SEO fundamentals) with QuickCreator's agentic
-  content pipeline (topic intelligence → research → writing → optimization → conversion).
-  Designed for executing end-to-end website SEO improvements and producing structured deliverables.
+description: |
+  PURPOSE: End-to-end SEO optimization — audit, keyword research, content creation, EEAT optimization, technical fixes, and conversion layer. Fuses Google Search Central guidelines (E-E-A-T, people-first content, technical SEO) with QuickCreator's agentic content pipeline (topic intelligence → research → writing → optimization → conversion).
+  TRIGGER: Use when the user asks for SEO optimization, creating SEO content/blog posts, improving search rankings or organic traffic, or generating a reusable SEO skill/SOP.
 trigger:
   - User requests SEO optimization for a website
   - User asks to create SEO content or blog posts
@@ -94,12 +92,177 @@ Keyword research is the bridge between user intent and content. Use the followin
 
 ## 3. Workflow: From Audit to Publish
 
-### Phase 0: Site Audit & Baseline
-Before creating new content, audit the existing site:
-1. **Technical SEO scan**: Use `technical-seo-audit` skill.
-2. **Baseline metrics capture**: TTFB, LCP, CLS, total requests, HTML size.
-3. **Content inventory**: List all pages/posts, identify thin content (<300 words), duplicate titles, missing meta descriptions.
-4. **Competitor gap analysis**: Identify 3-5 competitors ranking for target keywords; note their content depth, structure, and schema usage.
+### Phase 0: SEO Audit & Quantitative Baseline (MUST DO FIRST)
+
+**Rule**: Every SEO engagement begins with a full-site audit. Do not skip to content creation or keyword research without first establishing a quantitative baseline. The audit output drives all downstream prioritization.
+
+**Goal**: Assess the target website across 6 SEO dimensions, score each 0–100, and produce a prioritized fix list.
+
+#### 0.1 SEO Scoring Framework (6 Dimensions)
+
+| Dimension | Weight | What It Measures | Score 0–100 |
+|-----------|--------|------------------|-------------|
+| **D1: Technical Foundation** | 20% | Crawlability, indexability, site speed, mobile-friendliness, security headers, Core Web Vitals | 0–100 |
+| **D2: On-Page SEO** | 20% | Title/meta quality, heading hierarchy, keyword placement, URL structure, internal linking, image alt text | 0–100 |
+| **D3: Content Quality & EEAT** | 20% | Originality, depth, author signals, source citations, recency, thin content ratio | 0–100 |
+| **D4: Structured Data & Schema** | 10% | Presence and correctness of JSON-LD schema (Organization, BreadcrumbList, Product, Article, FAQ, LocalBusiness) | 0–100 |
+| **D5: Local SEO (if applicable)** | 10% | NAP consistency, local landing pages, Google Business Profile / Baidu Maps, local schema, map embeds | 0–100 |
+| **D6: Conversion & UX** | 20% | CTA presence by journey stage, page speed impact on bounce, mobile UX, trust signals | 0–100 |
+
+**Overall SEO Score** = weighted average of D1–D6. Report as:
+- **90–100**: Excellent (minor optimizations only)
+- **70–89**: Good (targeted improvements)
+- **50–69**: Needs work (significant gaps)
+- **<50**: Critical ( foundational fixes required before content investment)
+
+#### 0.2 Audit Execution Steps
+
+**Step 1 — Crawlability & Indexing (D1)**
+
+```bash
+# Check robots.txt
+curl -sL https://example.com/robots.txt
+
+# Get sitemap URLs
+curl -sL https://example.com/sitemap.xml | grep -oP '<loc>\K[^<]+'
+
+# Check HTTP status, headers, cache, CDN
+curl -sL -I -w "\nHTTP_CODE:%{http_code}\nSIZE:%{size_download}\nTIME:%{time_total}\n" -o /dev/null https://example.com/
+
+# Check for llms.txt (AI-friendly overview)
+curl -sL https://example.com/llms.txt
+```
+
+Score D1 based on:
+- HTTP 200 on all core pages (home, product, about, contact, blog, FAQ)
+- robots.txt not blocking important paths
+- Sitemap present and valid XML
+- Response time < 800ms TTFB
+- Security headers present (HSTS, X-Frame-Options, X-Content-Type-Options)
+- Mobile-friendly viewport meta
+
+**Step 2 — Page-by-Page On-Page Audit (D2 + D4)**
+
+For each core page, fetch and inspect:
+
+```bash
+# Fetch the page and inspect: title, meta desc, h1, schema, canonical, hreflang
+curl -sL -A "Mozilla/5.0" https://example.com/page | head -200
+
+# Performance baseline (timing + size)
+curl -sL -w "\nHTTP_CODE:%{http_code}\nSIZE:%{size_download}\nTIME:%{time_total}\n" -o /dev/null https://example.com/page
+```
+
+Per-page checklist (score each page, then average for D2):
+- **Title**: 50-60 chars, keyword-forward → +10 pts
+- **Meta description**: 120-160 chars, includes CTA → +10 pts
+- **H1**: exactly one, descriptive, includes primary keyword → +10 pts
+- **Canonical**: present, self-referencing → +10 pts
+- **Open Graph / Twitter Cards**: present with correct image → +10 pts
+- **Schema**: at least one valid JSON-LD (Organization, Article, Product, FAQPage, BreadcrumbList) → +20 pts
+- **BreadcrumbList schema**: full path (not just "Home") → +10 pts
+- **hreflang**: correct language/region tags (if multi-language) → +10 pts
+- **Keywords meta**: not over-stuffed (>20 keywords = penalty) → +5 pts
+- **Robots meta**: index/follow correctly set → +5 pts
+
+**Step 3 — Content Inventory (D3)**
+
+List all pages/posts from the sitemap, then score:
+- Thin content ratio: % of pages < 300 words (lower = higher score)
+- Duplicate titles/meta: % of pages with duplicates (lower = higher score)
+- Missing meta descriptions: % of pages without one (lower = higher score)
+- Missing alt text: % of images without descriptive alt (lower = higher score)
+- Author attribution: % of blog posts with author byline + bio (higher = higher score)
+- Publication/recency dates: % of content with visible date (higher = higher score)
+
+**Step 4 — Structured Data Validation (D4)**
+
+For each core page, check schema presence via `curl` + manual inspection or JSON-LD parser:
+- Organization schema on homepage
+- BreadcrumbList on every page (full path)
+- Article/Product/FAQPage schema on relevant pages
+- LocalBusiness schema (if local SEO applies)
+- Review schema (if testimonials present)
+- Validate at https://validator.schema.org/ or via `curl` + JSON parse
+
+**Step 5 — Local SEO Check (D5, skip if not local business)**
+- NAP consistency across footer, contact page, and 3rd-party directories
+- Google Business Profile / Baidu Maps claimed and optimized
+- Local landing pages: one per target city/region with city in title/H1/URL
+- Local schema (LocalBusiness or Organization with geo coordinates)
+- Map embed on local pages
+- Local review signals (count, recency, response rate)
+
+**Step 6 — Conversion & UX Audit (D6)**
+- CTA presence by page type and journey stage (Awareness→Advocacy)
+- Mobile UX: tap targets, readable font sizes, no horizontal scroll
+- Page speed impact: correlate load time with bounce likelihood
+- Trust signals: client logos, review counts, guarantees, secure badges
+- Form usability: field count, validation, confirmation messages
+
+**Step 7 — Competitor Gap Analysis (impacts D3 + D1 scoring context)**
+
+Identify 3-5 competitors ranking for target keywords. Compare:
+- Topic coverage gaps (what they cover that the client doesn't)
+- Content format (guides vs lists vs comparison tables)
+- Schema usage (which structured data types)
+- Internal linking density
+- Backlink profile strength (if data available via Ahrefs/SEMrush)
+
+#### 0.3 Audit Report Template
+
+Produce a structured report saved to `01-audit-reports/seo-audit-<date>.md`:
+
+```markdown
+# SEO Audit Report — [Site Name] — [Date]
+
+## Executive Summary
+| Dimension | Score | Weight | Weighted Score | Status |
+|-----------|-------|--------|----------------|--------|
+| D1: Technical Foundation | XX/100 | 20% | XX | 🔴🟡🟢 |
+| D2: On-Page SEO | XX/100 | 20% | XX | 🔴🟡🟢 |
+| D3: Content Quality & EEAT | XX/100 | 20% | XX | 🔴🟡🟢 |
+| D4: Structured Data & Schema | XX/100 | 10% | XX | 🔴🟡🟢 |
+| D5: Local SEO | XX/100 | 10% | XX | 🔴🟡🟢 |
+| D6: Conversion & UX | XX/100 | 20% | XX | 🔴🟡🟢 |
+| **OVERALL** | **XX/100** | **100%** | **XX** | **🔴🟡🟢** |
+
+## D1: Technical Foundation (XX/100)
+[Findings + score breakdown + fix list]
+
+## D2: On-Page SEO (XX/100)
+[Per-page scores + fix list]
+
+## D3: Content Quality & EEAT (XX/100)
+[Inventory stats + fix list]
+
+## D4: Structured Data & Schema (XX/100)
+[Schema presence matrix + fix list]
+
+## D5: Local SEO (XX/100)
+[Local signals audit + fix list]
+
+## D6: Conversion & UX (XX/100)
+[CTA audit + mobile UX + fix list]
+
+## Competitor Gap Summary
+[3-5 competitors compared + opportunity list]
+
+## Prioritized Action Plan
+| Priority | Issue | Dimension | Fix | Effort | Impact |
+|----------|-------|-----------|-----|--------|--------|
+| 🔴 P0 | [Issue] | D[X] | [Fix] | High/Med/Low | High/Med/Low |
+| 🟡 P1 | [Issue] | D[X] | [Fix] | High/Med/Low | High/Med/Low |
+| 🟢 P2 | [Issue] | D[X] | [Fix] | High/Med/Low | High/Med/Low |
+
+## Weekly Milestones
+- Week 1: [D1 fixes]
+- Week 2: [D2 + D4 fixes]
+- Week 3: [D3 content improvements]
+- Week 4: [D5 + D6 optimization]
+```
+
+**Deliverable**: `01-audit-reports/seo-audit-<date>.md` (must exist before proceeding to Phase 1)
 
 ### Phase 1: Topic Intelligence & Strategy
 
@@ -231,6 +394,7 @@ Execute this checklist for every page:
 5. **Structured Data**
    - JSON-LD schema validated
    - Article schema for blogs, Product schema for product pages, FAQ schema for Q&A sections
+   - **BreadcrumbList schema** — every page must have one with the **full path** (e.g. `Home > Products > DC Fast Chargers`), not just `Home` alone. Pair the Schema JSON-LD with a matching visible breadcrumb UI on the page.
    - **LocalBusiness / Organization schema** for local SEO (name, address, phone, geo, opening hours)
    - **Service schema** for service-oriented pages
    - **Review schema** for testimonials and ratings
@@ -560,6 +724,7 @@ fbkpower-seo/
 - **Inconsistent NAP**: Any variation in name, address, or phone across directories weakens local SEO trust signals.
 - **Missing hreflang**: Without proper language/region annotations, search engines may serve the wrong version to users.
 - **Thin local pages**: City landing pages with only a title change and no local-specific content are treated as doorway pages.
+- **BreadcrumbList with only "Home"**: This is the most common schema mistake. A BreadcrumbList with a single `Home` entry adds zero SEO value and wastes the opportunity for rich results. Every page must have the full navigation path in both the JSON-LD and a matching visible breadcrumb UI. See `references/breadcrumblist-implementation.md` for implementation patterns.
 - **WordPress + Elementor-specific**: Bulk DOM edits in the preview iframe do NOT persist. Use `window.elementor.elementsModel` or the WordPress REST API for reliable updates. See Phase 6 and `wordpress-browser-api-automation` skill.
 - **Yoast "Search Appearance" modal trap**: In the block editor, clicking Yoast's "Search Appearance" often opens a full-screen modal instead of expanding the sidebar. Use `browser_vision` to confirm UI state before typing.
 - **Nonce expiration**: `X-WP-Nonce` expires on page reload or timeout. If a call returns 403, re-extract from an active `/wp-admin/` page.
